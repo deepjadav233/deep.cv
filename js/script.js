@@ -1,193 +1,290 @@
-// Minimal site script: replace these sample values with your real data
+// Data Object
 const data = {
   name: 'Deep Jadav',
-  title: 'MCA 2nd year 4th semester',
+  title: 'Full Stack Developer',
   location: 'Baroda, Gujarat',
   email: 'deepjadav233@gmail.com',
   phone: '',
   about: 'I am a motivated aspiring Full-Stack Developer with experience in front-end technologies like HTML, CSS, JavaScript, and UI/UX design, along with Python for backend development. I am eager to learn new technologies and contribute to innovative projects.',
-  skills: [
-    // Frontend
-    'HTML5','CSS3','JavaScript (ES6+)','TypeScript','React.js','Next.js',
-    // Backend
-    'Node.js','Express.js','Python (APIs - basics)',
-    // Database / Cloud
-    'MongoDB','AWS (basic)',
-    // Languages & DSA
-    'C++','Java','Data Structures & Algorithms (DSA)'
-  ],
+  skills: {
+    frontend: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'TypeScript', 'React.js', 'Next.js', 'Tailwind CSS', 'Framer Motion'],
+    backend: ['Node.js', 'Express.js', 'Python', 'FastAPI', 'REST APIs'],
+    languages: ['C++', 'Java', 'Python', 'JavaScript', 'TypeScript'],
+    infra: ['Git', 'GitHub', 'VS Code', 'MongoDB', 'AWS (Basic)', 'Vercel']
+  },
   experiences: [
-    {title:'Aspiring Full-Stack Developer (Fresher)',period:'',desc:'Hands-on practice with front-end technologies: HTML, CSS, JavaScript. Basic backend development using Python. Understanding of UI/UX design principles and responsive layouts.'}
+    {
+      title: 'Aspiring Full-Stack Developer',
+      period: 'Present',
+      desc: 'Hands-on practice with front-end technologies: HTML, CSS, JavaScript. Basic backend development using Python. Understanding of UI/UX design principles and responsive layouts.'
+    }
   ],
   projects: [
     {
       title: 'Customer Segmentation ML',
       tech: 'Jupyter Notebook, Python',
-      desc: 'A machine learning project focused on customer segmentation.',
+      desc: 'A machine learning project focused on customer segmentation using clustering algorithms.',
       link: 'https://github.com/deepjadav233/Customer-Segmentation-ML'
     },
     {
       title: 'Deep CV',
       tech: 'JavaScript, HTML, CSS',
-      desc: 'Personal CV website built with modern web technologies.',
+      desc: 'Personal CV website built with modern web technologies, featuring a unique glassmorphism UI.',
       link: 'https://github.com/deepjadav233/deep.cv'
     },
     {
-      title: 'Dijkstra\'s Algorithm Visualization using Pygame',
+      title: 'Dijkstra\'s Algorithm Viz',
       tech: 'Python, Pygame',
-      desc: 'Visualization of Dijkstra\'s algorithm for pathfinding.',
+      desc: 'Interactive visualization of Dijkstra\'s algorithm for pathfinding in a grid.',
       link: 'https://github.com/deepjadav233/Dijkstra-s-Algorithm-Visualization-using-Pygame'
     },
     {
       title: 'Commerce Hub',
       tech: 'HTML, CSS, JavaScript',
-      desc: 'A modern, responsive e-commerce website featuring product categories, shopping cart, user dashboard, search functionality, and intuitive navigation.',
+      desc: 'A modern, responsive e-commerce website featuring product categories, shopping cart, and user dashboard.',
       link: 'https://github.com/deepjadav233/commerce_hub-main'
     },
     {
       title: 'TechNet Platform',
-      tech: 'Tech stack not specified',
-      desc: 'Description not available',
+      tech: 'MERN Stack',
+      desc: 'Developed a user-friendly job search platform where users can easily find jobs using filters like skills, location, and job type. Built an online Resume Maker that allows users to create professional resumes quickly and easily. Implemented a simple and clean UI to improve user experience and accessibility. Users can search jobs efficiently using advanced filtering options. Focused on helping freshers and job seekers save time in job searching and resume creation.',
       link: 'https://github.com/deepjadav233/TechNet-platform-main'
     }
   ],
-  resume: '', // set to a relative path like 'assets/Resume.pdf' if you add one
+  resume: '', // Add path to resume if available
   github: 'https://github.com/deepjadav233',
-  linkedin: 'https://www.linkedin.com/in/deepjadav03?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
-  twitter: ''
+  linkedin: 'https://www.linkedin.com/in/deepjadav03',
+  emailLink: 'mailto:deepjadav233@gmail.com'
+};
+
+// Populate Content
+function populateContent() {
+  try {
+    // Basic Info
+    const setText = (id, text) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = text;
+    };
+
+    setText('name', data.name);
+    // setText('title', data.title); // Title is static in HTML for now or can be dynamic
+    setText('location', data.location);
+    setText('email', data.email);
+    setText('aboutText', data.about);
+    setText('meta', 'MCA 2nd Year • Parul University');
+
+    // Skills
+    const renderSkills = (id, skills) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.innerHTML = '';
+      skills.forEach(skill => {
+        const chip = document.createElement('div');
+        chip.className = 'chip';
+        chip.textContent = skill;
+        el.appendChild(chip);
+      });
+    };
+
+    renderSkills('skillsFrontend', data.skills.frontend);
+    renderSkills('skillsBackend', data.skills.backend);
+    renderSkills('skillsLang', data.skills.languages);
+    renderSkills('skillsInfra', data.skills.infra);
+
+    // Experience
+    const expList = document.getElementById('experienceList');
+    if (expList) {
+      expList.innerHTML = '';
+      data.experiences.forEach(exp => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <h3>${exp.title}</h3>
+          <p class="meta">${exp.period}</p>
+          <p>${exp.desc}</p>
+        `;
+        expList.appendChild(card);
+      });
+    }
+
+    // Projects
+    const projList = document.getElementById('projectsList');
+    if (projList) {
+      projList.innerHTML = '';
+      data.projects.forEach(proj => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <h3>${proj.title}</h3>
+          <p class="meta">${proj.tech}</p>
+          <p>${proj.desc}</p>
+          ${proj.link ? `<a href="${proj.link}" target="_blank" rel="noopener" class="btn ghost">View Code <i class="fab fa-github"></i></a>` : ''}
+        `;
+        projList.appendChild(card);
+      });
+    }
+
+    // Links
+    const setLink = (id, url) => {
+      const el = document.getElementById(id);
+      if (el) el.href = url;
+    };
+
+    setLink('githubLink', data.github);
+    setLink('linkedinLink', data.linkedin);
+    setLink('emailBtn', data.emailLink);
+    
+    // Resume
+    const resumeLink = document.getElementById('resumeLink');
+    if (resumeLink) {
+        if (data.resume) resumeLink.href = data.resume;
+        else resumeLink.style.display = 'none';
+    }
+
+    // Contact Button
+    const contactBtn = document.getElementById('contactBtn');
+    if (contactBtn) {
+      contactBtn.addEventListener('click', () => {
+        window.location.href = data.emailLink;
+      });
+    }
+
+  } catch (error) {
+    console.error('Error populating content:', error);
+  }
 }
 
-console.log('Script loaded, data:', data);
+// Background Animation (Constellation Effect)
+function initCanvas() {
+  const canvas = document.getElementById('bg-canvas');
+  if (!canvas) return;
 
-function populateContent() {
-  console.log('populateContent called');
-  console.log('Data object:', data);
-  try {
-    const nameEl = document.getElementById('name')
-    if (nameEl) nameEl.textContent = data.name
-    const titleEl = document.getElementById('title')
-    if (titleEl) titleEl.textContent = data.title
-    const locationEl = document.getElementById('location')
-    if (locationEl) locationEl.textContent = `${data.location} • ${data.email} ${data.phone? '• '+data.phone : ''}`
-    const metaEl = document.getElementById('meta')
-    if(metaEl) metaEl.textContent = 'DOB: 22/03/2004 • University: Parul University'
-    const aboutEl = document.getElementById('aboutText')
-    if (aboutEl) aboutEl.textContent = data.about
-    const emailEl = document.getElementById('email')
-    if (emailEl) emailEl.textContent = `Email: ${data.email}`
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  let particles = [];
 
-  // Group skills into categories
-  const frontend = ['HTML5','CSS3','JavaScript (Basics)','Responsive Web Design','UI / UX Design','User Interface (UI) Design','User Experience (UX) Basics','Wireframing (Basic)','Simple & Clean Design Approach']
-  const backend = ['Python (Basics)','Basic Backend Logic','Programming Concepts','Basic Data Structures','Problem Solving','Logical Thinking']
-  const infra = ['Visual Studio Code','Git (Basic)','Debugging Basics']
-  const langs = ['Quick Learner','Teamwork','Time Management','Willingness to Learn']
+  const resize = () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  };
 
-  // Combine backend, databases & cloud into one array for skillsInfra
-  const combinedInfra = [...backend, ...infra]
+  class Particle {
+    constructor() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.vx = (Math.random() - 0.5) * 0.5;
+      this.vy = (Math.random() - 0.5) * 0.5;
+      this.size = Math.random() * 2 + 1;
+    }
 
-  function renderList(id, arr){
-    const el = document.getElementById(id)
-    if(!el) return
-    arr.forEach(s=>{
-      const chip = document.createElement('div')
-      chip.className = 'chip'
-      chip.textContent = s
-      el.appendChild(chip)
-    })
-  }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
 
-  renderList('skillsFrontend', frontend)
-  renderList('skillsBackend', backend)
-  renderList('skillsLang', langs)
-  renderList('skillsInfra', infra)
+      if (this.x < 0 || this.x > width) this.vx *= -1;
+      if (this.y < 0 || this.y > height) this.vy *= -1;
+    }
 
-  const experienceList = document.getElementById('experienceList')
-  if (experienceList) {
-    data.experiences.forEach(e=>{
-      const card = document.createElement('article')
-      card.className = 'card'
-      card.innerHTML = `
-      <h3>${e.title}</h3>
-      <p class="meta">${e.period || ''}</p>
-      <p>${e.desc}</p>
-    `
-      experienceList.appendChild(card)
-    })
-  }
-
-  const projectsList = document.getElementById('projectsList')
-  if (projectsList) {
-    data.projects.forEach(p=>{
-      const card = document.createElement('article')
-      card.className = 'card'
-      card.innerHTML = `
-      <h3>${p.title}</h3>
-      <p class="meta">${p.tech || ''}</p>
-      <p>${p.desc}</p>
-      ${p.link?`<p><a href="${p.link}" target="_blank" rel="noopener" class="btn ghost">View Project</a></p>`:''}
-    `
-      projectsList.appendChild(card)
-    })
-  }
-
-  // Social links
-  const github = document.getElementById('githubLink')
-  if(github) github.href = data.github || '#'
-  const linkedin = document.getElementById('linkedinLink')
-  if(linkedin) linkedin.href = data.linkedin || '#'
-  const emailBtn = document.getElementById('emailBtn')
-  if(emailBtn) emailBtn.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${data.email}`
-  // Twitter link removed
-
-  const resumeLink = document.getElementById('resumeLink')
-  if(resumeLink){
-    if(data.resume){
-      resumeLink.href = data.resume
-    } else {
-      resumeLink.style.display = 'none'
+    draw() {
+      ctx.fillStyle = 'rgba(0, 243, 255, 0.3)';
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
     }
   }
 
-  // Remove any leftover default contact paragraph that says "If you'd like to reach me" or contains a placeholder email
-  // This ensures old placeholder text like "you@example.com" is removed if it exists in the page.
-  try{
-    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT)
-    const toRemove = []
-    while(walker.nextNode()){
-      const el = walker.currentNode
-      if(el.children.length === 0 && el.textContent){
-        const txt = el.textContent.trim()
-        if(/If you'?d like to reach me/i.test(txt) || /you@example\.com/i.test(txt)){
-          toRemove.push(el)
+  const initParticles = () => {
+    particles = [];
+    const count = Math.min(Math.floor(window.innerWidth / 15), 100); // Responsive count
+    for (let i = 0; i < count; i++) {
+      particles.push(new Particle());
+    }
+  };
+
+  const animate = () => {
+    ctx.clearRect(0, 0, width, height);
+    
+    particles.forEach((p, index) => {
+      p.update();
+      p.draw();
+
+      // Draw connections
+      for (let j = index + 1; j < particles.length; j++) {
+        const p2 = particles[j];
+        const dx = p.x - p2.x;
+        const dy = p.y - p2.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 150) {
+          ctx.strokeStyle = `rgba(0, 243, 255, ${0.1 - dist / 1500})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
         }
       }
-    }
-    toRemove.forEach(n=>n.remove())
-  }catch(e){
-    // non-fatal
-    console.warn('cleanup:', e)
-  }
+    });
 
-  // Contact Button Functionality
-  const btn = document.getElementById('contactBtn')
-  if (btn) {
-    btn.addEventListener('click', function() {
-      const mailtoLink = 'mailto:deepjadav233@gmail.com?subject=Hello%20from%20your%20site&body=Hi%20Deep%2C%0D%0A%0D%0AI%20saw%20your%20CV%20and%20would%20like%20to%20connect.'
-      window.location.href = mailtoLink
-    })
-  }
+    requestAnimationFrame(animate);
+  };
 
-  // Email link is now a direct mailto link in HTML
-  } catch (error) {
-    console.error('Error in DOM manipulation:', error);
+  window.addEventListener('resize', () => {
+    resize();
+    initParticles();
+  });
+
+  resize();
+  initParticles();
+  animate();
+}
+
+// Mobile Menu
+function initMobileMenu() {
+  const menuToggle = document.getElementById('mobile-menu');
+  const navLinks = document.querySelector('.nav-links');
+
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      menuToggle.classList.toggle('active'); // Add animation to bars later if wanted
+    });
+
+    // Close menu when clicking a link
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        menuToggle.classList.remove('active');
+      });
+    });
   }
 }
 
-document.addEventListener('DOMContentLoaded', populateContent);
+// Intersection Observer for Fade-in Animations
+function initObserver() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
 
-// Also try to run immediately in case DOM is already loaded
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', populateContent);
-} else {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target); // Only animate once
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.fade-in').forEach(el => {
+    observer.observe(el);
+  });
+}
+
+// Initialize Everything
+document.addEventListener('DOMContentLoaded', () => {
   populateContent();
-}
+  initCanvas();
+  initMobileMenu();
+  initObserver();
+});

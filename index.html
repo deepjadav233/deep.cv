@@ -1,85 +1,186 @@
- <!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Your Name — CV</title>
+    <title>Deep Jadav | Portfolio</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-    <header class="site-header">
-      <div class="container header-grid">
-        <div class="profile">
-          <img src="deep_pic.jpg" alt="Deep Jadav photo" class="avatar" id="avatar" />
+    <!-- Background Animation Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="#" class="logo">Deep<span class="dot">.</span>cv</a>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact" id="contactNavLink">Contact</a>
         </div>
-        <div class="intro">
+        <div class="menu-toggle" id="mobile-menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero-section">
+      <div class="container hero-grid">
+        <div class="intro fade-in-up">
+          <div class="badge">Available for work</div>
           <h1 id="name">Your Name</h1>
-          <p id="title">Your Title — e.g., Full-stack Developer</p>
-          <p id="location">Baroda, Gujarat</p>
-          <p id="email">Email: deepboda@gmail.com</p>
-          <p id="meta">DOB: 10/11/2005 • University: Parul University</p>
+          <h2 class="gradient-text" id="title">Full Stack Developer</h2>
+          <p id="about-hero">Building digital experiences with code and creativity.</p>
+          
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-num" id="stat-exp">2+</span>
+              <span class="stat-label">Years Exp</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num" id="stat-projects">10+</span>
+              <span class="stat-label">Projects</span>
+            </div>
+          </div>
+
           <div class="actions">
-            <a id="resumeLink" href="#" class="btn" download>Download CV</a>
-            <button id="contactBtn" class="btn ghost">Contact</button>
+            <a id="resumeLink" href="#" class="btn primary-btn" download>
+              Download CV <i class="fas fa-download"></i>
+            </a>
+            <div class="socials" aria-label="social links">
+              <a id="githubLink" href="#" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+              <a id="linkedinLink" href="#" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+              <a id="emailBtn" href="#"><i class="fas fa-envelope"></i></a>
+            </div>
           </div>
-          <div class="socials" aria-label="social links">
-            <a id="githubLink" href="#" target="_blank" rel="noopener">GitHub</a>
-            <a id="linkedinLink" href="#" target="_blank" rel="noopener">LinkedIn</a>
-            <a id="emailBtn" href="#">Email</a>
-          </div>
+        </div>
+        
+        <div class="profile-container fade-in-up delay-200">
+          <div class="profile-glow"></div>
+          <img src="deep_pic.jpg" alt="Deep Jadav" class="avatar" id="avatar" />
         </div>
       </div>
     </header>
 
     <main class="container">
-      <section id="about">
-        <h2>About</h2>
-        <p id="aboutText">A short paragraph about you. Replace this with a concise summary of your background, interests and what you're looking for.</p>
+      <section id="about" class="section fade-in">
+        <div class="section-header">
+          <h2 class="section-title">About Me</h2>
+          <div class="line"></div>
+        </div>
+        <div class="about-content glass-card">
+          <p id="aboutText">Loading...</p>
+          <div class="info-grid">
+            <div class="info-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span id="location">Location</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-envelope"></i>
+              <span id="email">Email</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-university"></i>
+              <span id="meta">Education</span>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section id="skills">
-        <h2>Skills</h2>
-        <div class="split">
-          <div>
-            <h3 class="muted">Frontend</h3>
+      <section id="skills" class="section fade-in">
+        <div class="section-header">
+          <h2 class="section-title">Tech Stack</h2>
+          <div class="line"></div>
+        </div>
+        
+        <div class="skills-grid">
+          <div class="skill-category glass-card">
+            <div class="cat-header">
+              <i class="fas fa-code"></i>
+              <h3>Frontend</h3>
+            </div>
             <div class="chips" id="skillsFrontend"></div>
-            <h3 class="muted" style="margin-top:12px">Backend</h3>
+          </div>
+          
+          <div class="skill-category glass-card">
+            <div class="cat-header">
+              <i class="fas fa-server"></i>
+              <h3>Backend</h3>
+            </div>
             <div class="chips" id="skillsBackend"></div>
           </div>
-          <div>
-            <h3 class="muted">Languages & DSA</h3>
+          
+          <div class="skill-category glass-card">
+            <div class="cat-header">
+              <i class="fas fa-terminal"></i>
+              <h3>Languages & DSA</h3>
+            </div>
             <div class="chips" id="skillsLang"></div>
-            <h3 class="muted" style="margin-top:60px">Databases & Cloud</h3>
+          </div>
+          
+          <div class="skill-category glass-card">
+            <div class="cat-header">
+              <i class="fas fa-cloud"></i>
+              <h3>Infra & Tools</h3>
+            </div>
             <div class="chips" id="skillsInfra"></div>
           </div>
         </div>
       </section>
 
-      <section id="experience">
-        <h2>Experience</h2>
-        <div id="experienceList" class="cards">
+      <section id="experience" class="section fade-in">
+        <div class="section-header">
+          <h2 class="section-title">Experience</h2>
+          <div class="line"></div>
+        </div>
+        <div id="experienceList" class="timeline">
           <!-- JS will inject experience cards -->
         </div>
       </section>
 
-      <section id="projects">
-        <h2>Projects</h2>
-        <div id="projectsList" class="cards">
+      <section id="projects" class="section fade-in">
+        <div class="section-header">
+          <h2 class="section-title">Featured Projects</h2>
+          <div class="line"></div>
+        </div>
+        <div id="projectsList" class="projects-grid">
           <!-- JS will inject project cards -->
         </div>
       </section>
-
+      
+      <section id="contact" class="section fade-in">
+        <div class="cta-card">
+            <h2>Let's Work Together</h2>
+            <p>Interested in collaborating or have a question? Feel free to reach out.</p>
+            <button id="contactBtn" class="btn primary-btn">Say Hello <i class="fas fa-paper-plane"></i></button>
+        </div>
+      </section>
 
     </main>
 
     <footer class="site-footer">
-      <div class="container">
-        <p></p>
+      <div class="container footer-content">
+        <div class="footer-logo">Deep<span class="dot">.</span>cv</div>
+        <p>&copy; 2025 Deep Jadav. All rights reserved.</p>
+        <div class="footer-socials">
+             <!-- Cloned via JS or static -->
+        </div>
       </div>
     </footer>
 
-
-
-    <script src="js/script.js?v=3"></script>
+    <script src="js/script.js?v=4"></script>
   </body>
 </html>
